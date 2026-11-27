@@ -1,0 +1,12 @@
+{
+  "worldlink.button.share": "WorldLink: Welt freigeben",
+  "worldlink.button.close": "WorldLink: Welt schliessen",
+  "worldlink.button.friends": "WorldLink: Freunde",
+  "worldlink.screen.friends.title": "WorldLink - Freunde",
+  "worldlink.screen.friends.empty": "Noch keine Freunde eingetragen",
+  "worldlink.screen.friends.invite": "Einladen",
+  "worldlink.screen.friends.add": "Freund hinzufuegen",
+  "worldlink.screen.friends.back": "Zurueck",
+  "worldlink.status.open": "Deine Welt ist offen (Port %s)",
+  "worldlink.status.closed": "Keine Welt offen"
+}
