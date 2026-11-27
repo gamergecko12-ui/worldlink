@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 /**
- * Waehlt die Adresse, die im Verbindungstext steht.
+ * Picks the address used in the share text.
  * Reihenfolge: manuell gesetzt (Internet) vor automatischer lokaler Adresse.
  */
 public final class AddressResolver {
@@ -28,9 +28,9 @@ public final class AddressResolver {
     /** Hinweis fuer die Anzeige, damit der Host weiss, was er verschickt. */
     public static String hint(String address) {
         if (address.startsWith("127.") || address.startsWith("localhost")) {
-            return "Nur auf diesem Rechner erreichbar";
+            return "Only reachable on this computer";
         }
         boolean local = NatProbe.localAddresses().contains(address);
-        return local ? "Im eigenen Netzwerk erreichbar" : "Ueber das Internet erreichbar";
+        return local ? "Reachable on your own network" : "Reachable over the internet";
     }
 }

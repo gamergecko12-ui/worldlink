@@ -21,8 +21,8 @@ public record JoinInfo(String address, int port, String worldName) {
 
     /** Fertige Nachricht fuer Discord oder den Chat. */
     public String shareMessage() {
-        return "WorldLink: Welt \"" + worldName + "\" ist offen.\n"
-                + "Tritt bei ueber: " + joinTarget();
+        return "WorldLink: world \"" + worldName + "\" is open.\n"
+                + "Join with: " + joinTarget();
     }
 
     /** Version fuer gefaehrliche Anzeigen, ohne den Port zu verstecken. */

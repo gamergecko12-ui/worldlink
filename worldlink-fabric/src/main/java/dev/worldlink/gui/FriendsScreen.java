@@ -9,7 +9,7 @@ import net.minecraft.network.chat.Component;
 
 import java.util.List;
 
-/** Freundesliste mit Einladen-Button. Oberflaeche bleibt, Transport wechselt in Phase 3. */
+/** Friends list with an invite button. Anyone hosting can be invited, friendship not required. */
 public class FriendsScreen extends Screen {
 
     private static final int ROW_HEIGHT = 26;
@@ -19,7 +19,7 @@ public class FriendsScreen extends Screen {
     private String statusLine = FriendService.get().status();
 
     public FriendsScreen(Screen parent) {
-        super(Component.literal("WorldLink - Freunde"));
+        super(Component.literal("WorldLink - Friends"));
         this.parent = parent;
     }
 
@@ -30,10 +30,9 @@ public class FriendsScreen extends Screen {
         int y = LIST_TOP;
 
         for (Friend friend : friends) {
-            boolean hosting = friend.hosting();
-            Component label = Component.literal(friend.name() + (hosting ? " - offen" : ""));
+            Component label = Component.literal(friend.name() + (friend.hosting() ? " - open" : ""));
 
-            Button invite = Button.builder(Component.literal("Einladen"), b -> {
+            Button invite = Button.builder(Component.literal("Invite"), b -> {
                         this.statusLine = FriendService.get().invite(friend.id(), friend.name());
                         this.rebuildWidgets();
                     })
@@ -48,21 +47,21 @@ public class FriendsScreen extends Screen {
             y += ROW_HEIGHT;
         }
 
-        this.addRenderableWidget(Button.builder(Component.literal("Beitreten"), b -> {
-                    this.statusLine = "Code eingeben: siehe README (Phase 2b)";
+        this.addRenderableWidget(Button.builder(Component.literal("Join by code"), b -> {
+                    this.statusLine = "Paste a join code in the sharing screen";
                     this.rebuildWidgets();
                 })
                 .bounds(this.width / 2 - 150, this.height - 78, 300, 20)
                 .build());
 
-        this.addRenderableWidget(Button.builder(Component.literal("Freund hinzufuegen"), b -> {
-                    this.statusLine = "Anfragen kommen in Phase 3 aus der Cloud";
+        this.addRenderableWidget(Button.builder(Component.literal("Add friend"), b -> {
+                    this.statusLine = "Requests arrive from the cloud in a later step";
                     this.rebuildWidgets();
                 })
                 .bounds(this.width / 2 - 150, this.height - 54, 145, 20)
                 .build());
 
-        this.addRenderableWidget(Button.builder(Component.literal("Zurueck"), b -> this.onClose())
+        this.addRenderableWidget(Button.builder(Component.literal("Back"), b -> this.onClose())
                 .bounds(this.width / 2 + 5, this.height - 54, 145, 20)
                 .build());
     }
@@ -70,12 +69,12 @@ public class FriendsScreen extends Screen {
     @Override
     public void extractRenderState(GuiGraphicsExtractor graphics, int mouseX, int mouseY, float partialTick) {
         super.extractRenderState(graphics, mouseX, mouseY, partialTick);
-        graphics.centeredText(this.font, this.title, this.width / 2, 20, 0xFFFFFF);
+        graphics.centeredText(this.font, this.title, this.width / 2, 20, 0xFFFFFFFF);
         graphics.centeredText(this.font, Component.literal(this.statusLine),
-                this.width / 2, 38, 0xA0A0A0);
+                this.width / 2, 38, 0xFFA0A0A0);
         if (FriendService.get().friends().isEmpty()) {
-            graphics.centeredText(this.font, Component.literal("Noch keine Freunde eingetragen"),
-                    this.width / 2, LIST_TOP + 6, 0x808080);
+            graphics.centeredText(this.font, Component.literal("No friends added yet"),
+                    this.width / 2, LIST_TOP + 6, 0xFF808080);
         }
     }
 

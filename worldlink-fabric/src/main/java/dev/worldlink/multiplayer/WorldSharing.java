@@ -13,7 +13,7 @@ public final class WorldSharing {
     private static final SessionState SESSION = new SessionState();
 
     private static String manualAddress;
-    private static String worldName = "Welt";
+    private static String worldName = "World";
 
     private WorldSharing() {}
 
@@ -27,7 +27,7 @@ public final class WorldSharing {
     public static String worldName() { return worldName; }
 
     public static void setWorldName(String name) {
-        worldName = (name == null || name.isBlank()) ? "Welt" : name;
+        worldName = (name == null || name.isBlank()) ? "World" : name;
     }
 
     /** Gibt die laufende Singleplayer-Welt ueber den integrierten Server frei. */

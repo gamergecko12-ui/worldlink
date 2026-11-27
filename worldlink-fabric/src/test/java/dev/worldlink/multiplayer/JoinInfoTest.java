@@ -19,20 +19,23 @@ class JoinInfoTest {
     }
 
     @Test void rejectsBadPort() {
-        assertThrows(IllegalArgumentException.class, () -> new JoinInfo("10.0.0.1", 0, "Welt"));
-        assertThrows(IllegalArgumentException.class, () -> new JoinInfo("10.0.0.1", 70000, "Welt"));
+        assertThrows(IllegalArgumentException.class, () -> new JoinInfo("10.0.0.1", 0, "World"));
+        assertThrows(IllegalArgumentException.class, () -> new JoinInfo("10.0.0.1", 70000, "World"));
     }
 
     @Test void rejectsBlankAddress() {
-        assertThrows(IllegalArgumentException.class, () -> new JoinInfo("   ", 25565, "Welt"));
+        assertThrows(IllegalArgumentException.class, () -> new JoinInfo("   ", 25565, "World"));
     }
 
     @Test void manualAddressWins() {
-        assertEquals("203.0.113.7",
-                AddressResolver.resolve("203.0.113.7").orElseThrow());
+        assertEquals("203.0.113.7", AddressResolver.resolve("203.0.113.7").orElseThrow());
     }
 
     @Test void resolvesSomething() {
         assertTrue(AddressResolver.resolve(null).isPresent());
+    }
+
+    @Test void hintIsPlainEnglish() {
+        assertTrue(AddressResolver.hint("127.0.0.1").startsWith("Only reachable"));
     }
 }

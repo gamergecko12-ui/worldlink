@@ -1,12 +1,14 @@
 {
+  "worldlink.button.open": "WorldLink: Open to Friends",
   "worldlink.button.share": "WorldLink: Share World",
   "worldlink.button.close": "WorldLink: Close World",
   "worldlink.button.friends": "WorldLink: Friends",
+  "worldlink.screen.share.title": "WorldLink - Share World",
+  "worldlink.screen.share.copy": "Copy address",
   "worldlink.screen.friends.title": "WorldLink - Friends",
   "worldlink.screen.friends.empty": "No friends added yet",
   "worldlink.screen.friends.invite": "Invite",
-  "worldlink.screen.friends.add": "Add Friend",
-  "worldlink.screen.friends.back": "Back",
-  "worldlink.status.open": "Your world is open (port %s)",
-  "worldlink.status.closed": "No world open"
+  "worldlink.screen.friends.join": "Join by code",
+  "worldlink.screen.friends.add": "Add friend",
+  "worldlink.screen.back": "Back"
 }

@@ -20,7 +20,7 @@ public final class FriendService {
     private final SessionTokenStore tokens = new SessionTokenStore();
     private final JoinCode joinCode = new JoinCode(tokens);
     private final UUID selfId = UUID.randomUUID();
-    private String selfName = "Du";
+    private String selfName = "You";
     private Runnable onChange = () -> {};
 
     private FriendService() {
@@ -37,8 +37,8 @@ public final class FriendService {
 
     public static String statusText() {
         return WorldSharing.session().isOpen()
-                ? "Deine Welt ist offen (Port " + WorldSharing.session().port() + ")"
-                : "Keine Welt offen";
+                ? "Your world is open (port " + WorldSharing.session().port() + ")"
+                : "No world open";
     }
 
     public static Optional<Integer> hostedPort() {
@@ -57,14 +57,14 @@ public final class FriendService {
 
     /** Verschickt eine Einladung an einen Freund. Gibt den Text fuer die GUI zurueck. */
     public String invite(UUID friendId, String friendName) {
-        if (!WorldSharing.session().isOpen()) return "Deine Welt ist nicht offen";
+        if (!WorldSharing.session().isOpen()) return "Your world is not open";
         long now = System.currentTimeMillis();
         Invite invite = new Invite(UUID.randomUUID(), selfId, selfName, friendId,
                 now, now + INVITE_TTL_MILLIS);
         registry.createInvite(friendId, invite);
         tokens.issue(friendId, now, INVITE_TTL_MILLIS);
         transport.send("INVITE " + invite.code());
-        return "Code fuer " + friendName + ": " + invite.code();
+        return "Code for " + friendName + ": " + invite.code();
     }
 
     /** Entfernt alle offenen Einladungen und Token einer Person. */

@@ -1,6 +1,5 @@
 package dev.worldlink.client;
 
-import dev.worldlink.friends.FriendService;
 import dev.worldlink.gui.FriendsScreen;
 import dev.worldlink.gui.ShareWorldScreen;
 import dev.worldlink.multiplayer.WorldSharing;
@@ -31,7 +30,7 @@ public class WorldLinkClient implements ClientModInitializer {
                     .build();
             Screens.getWidgets(screen).add(share);
 
-            Button closeWorld = Button.builder(Component.literal("WorldLink: Welt schliessen"), b -> {
+            Button closeWorld = Button.builder(Component.literal("WorldLink: Close World"), b -> {
                         WorldSharing.close();
                         share.setMessage(shareLabel());
                     })
@@ -40,7 +39,7 @@ public class WorldLinkClient implements ClientModInitializer {
             closeWorld.active = WorldSharing.session().isOpen();
             Screens.getWidgets(screen).add(closeWorld);
 
-            Button friends = Button.builder(Component.literal("WorldLink: Freunde"), b ->
+            Button friends = Button.builder(Component.literal("WorldLink: Friends"), b ->
                             Minecraft.getInstance().gui.setScreen(new FriendsScreen(screen)))
                     .bounds(scaledWidth / 2 - 102, 52, 204, 20)
                     .build();
@@ -50,7 +49,7 @@ public class WorldLinkClient implements ClientModInitializer {
 
     private static Component shareLabel() {
         return Component.literal(WorldSharing.session().isOpen()
-                ? "WorldLink: Welt teilen"
-                : "WorldLink: Welt freigeben");
+                ? "WorldLink: Share World"
+                : "WorldLink: Open to Friends");
     }
 }
